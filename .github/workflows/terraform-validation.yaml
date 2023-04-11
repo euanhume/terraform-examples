@@ -1,0 +1,29 @@
+name: Terraform Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-validation:
+    name: Terraform Validation
+    runs-on: fedora-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Terraform and TFLint
+        run: |
+          sudo dnf -y update
+          sudo dnf -y install unzip
+          curl -sL https://raw.githubusercontent.com/robertpeteuil/terraform-installer/master/terraform-install.sh | bash
+          curl -sL https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+      - name: Validate Terraform
+        run: terraform validate
+        working-directory: ${{ github.workspace }}
+      - name: Lint Terraform with TFLint
+        run: tflint .
+        working-directory: ${{ github.workspace }}
+      - name: Format Terraform
+        run: terraform fmt -recursive -check
+        working-directory: ${{ github.workspace }}
