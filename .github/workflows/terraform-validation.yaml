@@ -8,14 +8,14 @@ on:
 jobs:
   terraform-validation:
     name: Terraform Validation
-    runs-on: fedora-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install Terraform and TFLint
         run: |
-          sudo dnf -y update
-          sudo dnf -y install unzip
+          sudo apt-get update
+          sudo apt-get install -y unzip
           curl -sL https://raw.githubusercontent.com/robertpeteuil/terraform-installer/master/terraform-install.sh | bash
           curl -sL https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
       - name: Validate Terraform
