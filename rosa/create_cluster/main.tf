@@ -5,7 +5,7 @@ terraform {
       version = ">= 4.20.0"
     }
     ocm = {
-      version = " 1.0.1"
+      version = " 1.0.3"
       source  = "terraform-redhat/ocm"
     }
   }
@@ -44,12 +44,7 @@ resource "ocm_cluster_rosa_classic" "rosa_sts_cluster" {
     "product" = "openshift",
     "foo"     = "bar"
   }
-  version = "openshift-v4.12.0"
-  lifecycle {
-    ignore_changes = [
-      version,
-    ]
-  }
+  version = "openshift-v4.12.21"
 }
 
 resource "ocm_cluster_wait" "rosa_cluster" {
@@ -65,7 +60,7 @@ data "ocm_rosa_operator_roles" "operator_roles" {
 
 module "operator_roles" {
   source  = "terraform-redhat/rosa-sts/aws"
-  version = "0.0.4"
+  version = "0.0.5"
 
   create_operator_roles = true
   create_oidc_provider  = true
