@@ -22,7 +22,7 @@ jobs:
         run: terraform validate
         working-directory: ${{ github.workspace }}
       - name: Lint Terraform with TFLint
-        run: tflint .
+        run: tflint --chdir=.
         working-directory: ${{ github.workspace }}
       - name: Format Terraform
         run: terraform fmt -recursive -check
