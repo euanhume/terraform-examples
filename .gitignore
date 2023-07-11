@@ -34,7 +34,7 @@ override.tf.json
 *.tflock
 
 # Terraform HCL lock files
-*.hcl.lock
+*.lock.hcl
 
 # Ignore the .terraform directory
 /.terraform
