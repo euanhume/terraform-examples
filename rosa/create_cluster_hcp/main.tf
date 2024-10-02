@@ -60,8 +60,8 @@ locals {
 
 # The network validator requires an additional 60 seconds to validate Terraform clusters.
 resource "time_sleep" "wait_60_seconds" {
-  count = var.create_vpc ? 1 : 0
-  depends_on = [module.vpc]
+  count           = var.create_vpc ? 1 : 0
+  depends_on      = [module.vpc]
   create_duration = "60s"
 }
 
